@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+apps/web/dist/
+apps/web/.vite/
+
+# Database
+*.db
+*.sqlite3
+
+# Audio uploads
+uploads/
+*.wav
+*.mp3
+*.ogg
+*.webm
+
+# Documents output
+output/
+generated_docs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker/volumes/
+
+# Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Logs
+*.log
+logs/
+
+# Alembic
+alembic.ini.local

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: acoustistruct
+      POSTGRES_PASSWORD: acoustistruct
+      POSTGRES_DB: acoustistruct
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U acoustistruct"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: 
+      context: ./services/api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./services/api:/app
+      - ./uploads:/app/uploads
+      - ./generated_docs:/app/generated_docs
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://acoustistruct:acoustistruct@postgres:5432/acoustistruct
+      - DEMO_MODE=true
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:
